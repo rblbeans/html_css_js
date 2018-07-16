@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+#div1,#div2{width: 100px;height: 100px;background: red;filter:alpha(opacity:80);opacity:0.8;}
+#div2{background: blue;}
+</style>
+<script>
+window.onload=function(){
+var oDiv1=document.getElementById('div1');
+var oDiv2=document.getElementById('div2');
+oDiv1.onmouseover=function(){
+startMove(oDiv1,{width:600,height:300,opacity:100});
+};
+oDiv1.onmouseout=function(){
+startMove(oDiv1,{width:120,height:150,opacity:60});
+};
+
+oDiv2.onmouseover=function(){
+startMove(oDiv2,{width:600,height:300,opacity:100});
+};
+oDiv2.onmouseout=function(){
+startMove(oDiv2,{width:120,height:150,opacity:60});
+};
+};
+function startMove(obj,json,fn){
+clearInterval(obj.timer);
+obj.timer=setInterval(function(){
+//设一个暂停 参数   当里面有没有执行到目标值的参数时,pause=false
+var pause=true;
+for(var attr in json){
+if(attr==='opacity'){
+//如果目标参数是opacity,由于opacity是小数 ,  目标值抒写用整数如30, 所以需要对其进行换算
+                   //var iCur=parseFloat(getStyle(obj,attr))*100;
+                   //alert(0.07*100);出现小数乘以整数的bug ,得到的数并非7而是7.0....01 所以需要parseInt
+                   //第一种 方案：var iCur=Math.round(parseFloat(getStyle(obj,attr))*100);
+                   //第二种：
+                       var iCur=parseInt(getStyle(obj,attr)*100);
+                   }
+else{
+                   var iCur=parseInt(getStyle(obj,attr));
+}
+var speed=(json[attr]-iCur)/7;
+                   speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                   //只用if(json[attr]==iCur){clearInterval(obj.timer);if(fn)fn();}会出现问题，当某一个attr执行完毕会把obj.timer结束
+                   //会出现有的参数到达目标值 有的没有达到目标值的情况
+if(json[attr]!=iCur){
+pause=false;
+}
+//如果是opacity 则运行下面的函数
+if(attr==='opacity'){
+var opp=iCur+speed;
+   obj.style.filter='alpha(opacity:'+(iCur+speed)+')';
+   obj.style.opacity=(iCur+speed)/100;
+   document.title=opp;
+}
+else{
+    obj.style[attr]=iCur+speed+'px' ;
+}
+
+}
+//全部参数执行到目标值时候  开始清掉定时器，执行需要执行的函数
+if(pause){
+clearInterval(obj.timer);
+if(fn)fn();
+}
+},30)
+}
+           //  获取样式函数,避免只能获取行内样式的尴尬.
+function getStyle(obj,attr){
+       if(obj.currentStyle){
+           return obj.currentStyle[attr];
+       }
+       else{
+           return getComputedStyle(obj,false)[attr];
+       }
+};
+</script>
+</head>
+<body>
+<div id='div1'></div>
+<br />
+<div id='div2'></div>
+</body>
+</html>

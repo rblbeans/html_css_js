@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="head.js"></script>
+    <link rel="stylesheet" href="theme.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css"/>
+    <title>Title</title>
+</head>
+<body>
+  <div class="py-5 text-white bg-qiniu text-center" style="height: 89.1%">
+    <div class="container" >
+      <div class="row" >
+        <div class="col-md-12">
+          <img src="qn_logo.png"/>
+          <h1>QiNiu CDN Compare</h1>
+          <p class="lead mb-4">Just select a datetime to calculate</p>
+          <form class="form-inline justify-content-center">
+            <div class=kp"input-group">
+              <input type="text" class="form-control mr-3 my-1" placeholder="请选择日期" id="datetimepicker" autocomplete="off"> </div>
+            <button type="submit" class="btn btn-secondary">计算</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<script src="jquery-3.2.1.min.js"></script>
+<script src="jquery.datetimepicker.full.js"></script>
+<script>
+    $.datetimepicker.setLocale('ch');
+    $('#datetimepicker').datetimepicker({step:5});
+</script>
+
+</body>
+</html>

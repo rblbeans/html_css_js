@@ -1,0 +1,172 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="head.js"></script>
+  <link rel="stylesheet" href="theme.css" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <script type="text/javascript" src="sort_table.js"></script>
+  <script type="text/javascript">
+  function LoadToDB() {
+      var progress_span = document.getElementById("progress_span");
+      var value = document.getElementById("progress").style.width;
+      var replace = value.replace("%","") - 1;
+      console.log(replace);
+      progress_span.innerText = value;
+      var ID = setInterval(function () {
+        if (replace < 100) {
+          replace += 10;
+          value = replace + "%";
+          progress_span.innerText = value;
+          document.getElementById("progress").style.width = replace + "%";
+        }
+        if (replace === 100) {
+          clearInterval(ID);
+          document.getElementById("prog_all").style.display="none";
+          document.getElementById("wd").style.display="";
+        }
+      }, 100);
+      replace = 0;
+    }
+     function hiddened() {
+        document.getElementById("wd").style.display="none";
+        document.getElementById("prog_all").style.display="";
+    }
+    console.log(getStyle(document.getElementById("wd"),'display'));
+  //console.log(document.getElementById("prog_all").style.display);
+  </script>
+</head>
+<body>
+  <div class="py-5" id="wd" style="display: none">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-success" role="alert">
+            <i  class="close fa-close fa" data-dismiss="alert" aria-label="Close" onclick="hiddened()"></i>
+            <h4 class="alert-heading">Well done!</h4>
+            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="py-5" id="prog_all" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="progress">
+            <div id="progress"  class="progress-bar progress-bar-striped active" role="progressbar" style="width: 1%"  aria-valuemin="0" aria-valuemax="100"><span id="progress_span"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="py-4" >
+  <div class="container">
+      <div class="py-1">过滤器 </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="LoadToDB()">Go!</button>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="btn-group" style="float: right">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             xxxxxx <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+     <div class="py-3">
+         <input type="text"  placeholder="ID">
+         <input type="text"  placeholder="IP">
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             机房 <span class="caret"></span>
+          </button>
+      </div>
+      <div class="py-3">
+          <button type="button" class="btn btn-success " title="添加"><i class="fa fa-plus-square"></i></button>
+          <button type="button" class="btn btn-warning" title="修改"><i class="fa fa-pencil" style="color: #FFF"></i> </button>
+          <button type="button" class="btn btn-danger " title="删除"><i class="fa fa-trash"></i> </button>
+          <button type="button" class="btn btn-primary " title="刷新"><i  class="fa fa-refresh"></i></button>
+      </div>
+     <p style="float: right;height: 10px">共计:10台</p>
+  </div>
+</div>
+  <!-- 分割线 -->
+
+  <div class="py-0"><HR  width="80%" color=#987cb9 ></div>
+  <div class="py-3" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table" id="table">
+            <thead>
+              <tr>
+                  <th><a href="#" style="color: #1b6d85; text-decoration:none">#</a><i class="fa fa-sort-amount-desc" id="number_esc" ></i></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">所在机房</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">机柜号</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">型号</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">SN号</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">配置信息</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">系统</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">用途</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">IP</a></th>
+                  <th><a href="#" style="color: #000; text-decoration:none">iDRAC</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>江门</td>
+                <td>A3</td>
+                <td>730xd</td>
+                <td>XNDASD12</td>
+                <td>E5-3630*2-64G-4T*12</td>
+                <td>Centos7</td>
+                <td>CDN</td>
+                <td>1.1.1.1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>啊门</td>
+                <td>B2</td>
+                <td>730xd</td>
+                <td>XNDASD12</td>
+                <td>cpu:E3-3630*2 内存:64G 硬盘:4T*12</td>
+                <td>Centos6.8</td>
+                <td>CDN</td>
+                <td>12.12.12.12</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>比门</td>
+                <td>A1</td>
+                <td>730xd</td>
+                <td>XNDASD12</td>
+                <td>cpu:E5-3630*2 内存:64G 硬盘:4T*12</td>
+                <td>Centos6.6</td>
+                <td>CDN</td>
+                <td>123.123.123.123</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</HTML>
