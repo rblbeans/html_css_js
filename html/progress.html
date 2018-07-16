@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<link rel="stylesheet" href="theme.css" type="text/css">
+    <script type="text/javascript" src="../js/loadingbar.js"></script>
+    <link rel="stylesheet" href="../css/theme.css" type="text/css">
+    <link rel="stylesheet" href="../css/loadingbar.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 <script type="text/javascript">
   function LoadToDB() {
+      document.getElementById("prog_all").style.display="";
       var progress_span = document.getElementById("progress_span");
       var value = document.getElementById("progress").style.width;
       var replace = value.replace("%","") - 1;
@@ -29,7 +32,9 @@
     }
   function hiddened() {
     document.getElementById("wd").style.display="none";
-    document.getElementById("prog_all").style.display="";
+    document.getElementById("progress").style.width="1%";
+    document.getElementById("prog_all").style.display="none";
+    document.getElementById("progress_span").textContent=""
     }
  </script>
 </head>
@@ -47,7 +52,7 @@
       </div>
     </div>
   </div>
-<div class="py-5" id="prog_all" >
+<div class="py-5" id="prog_all" style="display: none">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -59,5 +64,6 @@
     </div>
 </div>
 <button class="btn btn-default" type="button" onclick="LoadToDB()">Go!</button>
+<div class="ldBar" style="width:100%;height:60px" data-stroke="data:ldbar/res,gradient(0,1,#9df,#9fd,#df9,#fd9)" data-path="M10 20Q20 15 30 20Q40 25 50 20Q60 15 70 20Q80 25 90 20"></div>
 </body>
 </html>
